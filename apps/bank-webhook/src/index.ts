@@ -1,5 +1,6 @@
 import express from "express";
 import db from "@repo/db/client";
+
 const app = express();
 
 app.use(express.json())
@@ -33,7 +34,7 @@ app.post("/hdfcWebhook", async (req, res) => {
             db.onRampTransaction.updateMany({
                 where: {
                     token: paymentInformation.token
-                }, 
+                },
                 data: {
                     status: "Success",
                 }
@@ -43,7 +44,7 @@ app.post("/hdfcWebhook", async (req, res) => {
         res.json({
             message: "Captured"
         })
-    } catch(e) {
+    } catch (e) {
         console.error(e);
         res.status(411).json({
             message: "Error while processing webhook"
